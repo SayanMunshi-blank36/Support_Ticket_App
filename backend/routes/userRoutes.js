@@ -3,7 +3,13 @@
 const express = require("express");
 const router = express.Router(); // express.Router() helps us to use the routes functionality.
 
-const { registerUser, loginUser } = require("../controllers/userController"); // Bringing in the controllers from the controllers.
+const {
+  registerUser,
+  loginUser,
+  getMe,
+} = require("../controllers/userController"); // Bringing in the controllers from the controllers.
+
+const { protect } = require("../middleware/authMiddleware");
 
 // router.post("/", (req, res) => {
 //   // Here "/" takes the value which is given in the main server file i.e. in this case "/api/users" which is given in app.use()
@@ -18,5 +24,6 @@ const { registerUser, loginUser } = require("../controllers/userController"); //
 // Using the the controller function makes the code clean
 router.post("/", registerUser);
 router.post("/login", loginUser);
+router.get("/me", protect, getMe);
 
 module.exports = router;
