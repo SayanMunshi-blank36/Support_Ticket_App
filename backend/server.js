@@ -1,5 +1,7 @@
 const express = require("express"); // commonJs module syntax - bringing express module. If in package.json we specify "type": "module" then we can use "import" syntax i.e. ES6 syntax.
 
+const colors = require("colors");
+
 const dotenv = require("dotenv").config(); // package for using the env files.
 
 // const PORT = 5000; // local port on which the backend will run during production. It will be created later as an environment variable in .env file.
@@ -7,6 +9,11 @@ const dotenv = require("dotenv").config(); // package for using the env files.
 const PORT = process.env.PORT || 5000; // we can receive the data in .env file using process.env.{var_name} but we have to use the dotenv module.
 
 const { errorHandler } = require("./middleware/errorMiddleware");
+
+const connectDB = require("./config/db"); // connection to DataBase is brought in
+
+// Connect to database
+connectDB();
 
 const app = express(); // Initialising the app variable as an express server.
 
